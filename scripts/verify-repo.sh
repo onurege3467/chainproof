@@ -14,10 +14,12 @@ if [ $# -lt 1 ]; then
 fi
 
 REPO="$1"
-OWNER="${REPO%/*}"
+
+# Split on the first slash
+OWNER="${REPO%%/*}"
 NAME="${REPO#*/}"
 
-if [ -z "$OWNER" ] || [ -z "$NAME" ] || [ "$OWNER" = "$NAME" ]; then
+if [ -z "$OWNER" ] || [ -z "$NAME" ] || [ "$OWNER" = "$REPO" ]; then
   echo "Error: Invalid repo format. Use owner/repo-name (e.g., octocat/Hello-World)"
   exit 1
 fi
